@@ -32,8 +32,7 @@ import javax.swing.event.ChangeListener;
 
 /**
  *
- * De Main klasse is de hoofdklasse van het programma, vanuit hier wordt alles
- * gestart en deze klasse beheerd ook alle lijsten waar de informatie in staat.
+ * The Main class starts the application and is the manager of the dynamic lists containing information.
  *
  * @author Joeri Meijer
  *
@@ -42,7 +41,7 @@ import javax.swing.event.ChangeListener;
 public class Main {
 
     /**
-     * Normale Variabelen
+     * Normal variables
      */
     public JFrame frame;
     public Render render;
@@ -57,7 +56,8 @@ public class Main {
     private static int programHeight = 600;
 
     /**
-     * Positievariabelen voor de auto's
+     * Car position variables
+     * TODO Make car position variables user positionable
      */
     public int stopL = 200;
     public int stopU = 90;
@@ -80,13 +80,13 @@ public class Main {
     public Coordinate spawnCoordDR = new Coordinate(440, 530);
 
     /**
-     * Main thread gestart
+     * Start main thread
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    // Maak een nieuwe frame
+                    // Make a new JFrame
                     Main window = new Main();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
@@ -100,16 +100,14 @@ public class Main {
      * Constructor
      */
     public Main() {
-        // Variabelen initializeren
+        // Initialize variables
         cars = new CopyOnWriteArrayList<Car>();
         lights = new CopyOnWriteArrayList<Light>();
         sensors = new CopyOnWriteArrayList<CarSensor>();
         results = new CopyOnWriteArrayList<TestResult>();
         frame = new JFrame();
 
-        // Geef het frame de volgende eigenschappen: Formaat, Centreren, Niet verklein-
-        // of vergrootbaar, Ongedecoreerd, Zonder Layout, Witte Achtergrond, Sluit af
-        // wanneer hij wordt gesloten.
+        // Give the frame the following properties: Size, Centering, Resizing, Decoration, Layout, Background, Exit on Close
         frame.setSize(programWidth, programHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -122,14 +120,20 @@ public class Main {
     }
 
     /**
-     * Methode om de resultaten van de test in een textbestand op het bureaublad te
-     * plaatsen.
+     * Method to store the results of the test in a textfile on the desktop
      *
      * @throws IOException
+     *
+     * TODO make storing this file optional
+     * TODO make location of file user-assignable
+     * TODO add in-application view of results
+     * TODO seperate processing results from writing results
      */
     public void writeResults() throws IOException {
-        // Maak een lijst voor elke richting voor de gemiddelde waardes.
+        // Make list to hold file content
         List<String> lines = new ArrayList<String>();
+
+        // Make lists for the results for the different directions.
         List<TestResult> ll = new ArrayList<TestResult>();
         List<TestResult> ls = new ArrayList<TestResult>();
         List<TestResult> lr = new ArrayList<TestResult>();
@@ -143,7 +147,7 @@ public class Main {
         List<TestResult> ds = new ArrayList<TestResult>();
         List<TestResult> dr = new ArrayList<TestResult>();
 
-        // Variabelen voor makkelijkere if-statements
+        // Variables for more efficient if-statements
         LightSide left = LightSide.LEFT;
         LightSide up = LightSide.UP;
         LightSide right = LightSide.RIGHT;
@@ -152,11 +156,10 @@ public class Main {
         LightDirection STRAIGHT = LightDirection.STRAIGHT;
         LightDirection RIGHT = LightDirection.RIGHT;
 
-        // Bovenste lijn van niewe test
+        // Top row of new test
         lines.add("----NEW TEST----");
 
-        // Maak voor elk resultaat een lijn in het bestand en voeg het resultaat toe aan
-        // de correcte lijst. Verwijder daarna het object uit de lijst van resultaten.
+        // Sort the different results into their own lists to calculate the average, display the singular result. Then remove the object from the list of results.
         for (TestResult result : results) {
             lines.add("Side: " + result.side + " | Direction: " + result.direction + " | Timer: " + result.timer);
 
@@ -200,56 +203,52 @@ public class Main {
             results.remove(result);
         }
 
-        // Voeg de gemiddelde waardes toe aan het bestand
-        lines.add("Gemiddelde bij side: LEFT en direction: LEFT: " + getAverageTime(ll));
-        lines.add("Gemiddelde bij side: LEFT en direction: STRAIGHT: " + getAverageTime(ls));
-        lines.add("Gemiddelde bij side: LEFT en direction: RIGHT: " + getAverageTime(lr));
-        lines.add("Gemiddelde bij side: UP en direction: LEFT: " + getAverageTime(ul));
-        lines.add("Gemiddelde bij side: UP en direction: STRAIGHT: " + getAverageTime(us));
-        lines.add("Gemiddelde bij side: UP en direction: RIGHT: " + getAverageTime(ur));
-        lines.add("Gemiddelde bij side: RIGHT en direction: LEFT: " + getAverageTime(rl));
-        lines.add("Gemiddelde bij side: RIGHT en direction: STRAIGHT: " + getAverageTime(rs));
-        lines.add("Gemiddelde bij side: RIGHT en direction: RIGHT: " + getAverageTime(rr));
-        lines.add("Gemiddelde bij side: DOWN en direction: LEFT: " + getAverageTime(dl));
-        lines.add("Gemiddelde bij side: DOWN en direction: STRAIGHT: " + getAverageTime(ds));
-        lines.add("Gemiddelde bij side: DOWN en direction: RIGHT: " + getAverageTime(dr));
+        // Add the average values to the file
+        lines.add("Average where side: LEFT and direction: LEFT: " + getAverageTime(ll));
+        lines.add("Average where side: LEFT and direction: STRAIGHT: " + getAverageTime(ls));
+        lines.add("Average where side: LEFT and direction: RIGHT: " + getAverageTime(lr));
+        lines.add("Average where side: UP and direction: LEFT: " + getAverageTime(ul));
+        lines.add("Average where side: UP and direction: STRAIGHT: " + getAverageTime(us));
+        lines.add("Average where side: UP and direction: RIGHT: " + getAverageTime(ur));
+        lines.add("Average where side: RIGHT and direction: LEFT: " + getAverageTime(rl));
+        lines.add("Average where side: RIGHT and direction: STRAIGHT: " + getAverageTime(rs));
+        lines.add("Average where side: RIGHT and direction: RIGHT: " + getAverageTime(rr));
+        lines.add("Average where side: DOWN and direction: LEFT: " + getAverageTime(dl));
+        lines.add("Average where side: DOWN and direction: STRAIGHT: " + getAverageTime(ds));
+        lines.add("Average where side: DOWN and direction: RIGHT: " + getAverageTime(dr));
 
-        // Geef aan dat de test is beeïndigd
+        // Add line for end of test
         lines.add("----END----");
 
-        // Maak/edit het bestand
+        // Make or edit the file
         Files.write(Paths.get(System.getProperty("user.home") + "/Desktop/Verkeerslichten_Resultaten.txt"), lines,
                 StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
     /**
-     * Methode om het gemiddelde van een lijst te krijgen. Wordt gebruikt om de
-     * resultaten van de test overzichtelijk te maken. Hij telt wat de totale
-     * hoeveelheid is en deelt dat dan door hoeveel waardes er zijn.
+     * Method to generate the average value from a list
      *
-     * @param list:
-     *            lijst waarvan het gemiddelde wordt gevraagd
-     * @return
+     * @param list: The list of which the average value has to be calculated
+     * @return int: The average of the list, returns 0 if the list is empty
      */
     private int getAverageTime(List<TestResult> list) {
+        if (list.size() == 0) {
+            return 0;
+        }
+
         int total = 0;
 
         for (TestResult result : list) {
             total += result.timer;
         }
 
-        if (list.size() != 0) {
-            return total / list.size();
-        } else {
-            return 0;
-        }
+        return total / list.size();
     }
 
     /**
-     * Methode om alle waardes en het scherm te resetten.
+     * Method to remove all of the objects from the screen.
      *
-     * @param lblMap:
-     *            het achtergrond object bij de software en hardware scenario's
+     * @param lblMap: the background object generated with the different scenarios
      */
     public void reset(JLabel lblMap) {
         try {
@@ -258,57 +257,58 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Verwijder alle auto's
+        // Remove all car objects
         for (Car car : cars) {
             cars.remove(car);
         }
 
-        // Verwijder alle lichten
+        // Remove all light objects
         for (Light light : lights) {
             lights.remove(light);
         }
 
-        // Verwijder alle sensoren
+        // Remove all sensor objects
         for (CarSensor sensor : sensors) {
             sensors.remove(sensor);
         }
 
-        // Vertel aan update thread dat er gestopt moet worden
+        // Tell the update thread to stop
         stopped = true;
 
-        // Reset het scherm
+        // Reset the screen
         frame.remove(lblMap);
         frame.repaint();
         resetFrame();
     }
 
     /**
-     * Klasse om alles op het beginscherm te zetten.
+     * Method to paint the main menu screen
+     * TODO change to English
      */
     public void resetFrame() {
-        // Uitleg tekst
-        JTextArea txtTekst = new JTextArea();
-        txtTekst.setLocation(10, 46);
-        txtTekst.setSize(764, 151);
-        txtTekst.setWrapStyleWord(true);
-        txtTekst.setLineWrap(true);
-        txtTekst.setEditable(false);
-        txtTekst.setText(
+        // Explanatory text
+        JTextArea txtText = new JTextArea();
+        txtText.setLocation(10, 46);
+        txtText.setSize(764, 151);
+        txtText.setWrapStyleWord(true);
+        txtText.setLineWrap(true);
+        txtText.setEditable(false);
+        txtText.setText(
                 "Dit is een programma dat hoort bij een profielwerkstuk over de verkeerslichten op het kruispunt van de Hollandweg en de Burgemeester Matsersingel. Dit profielwerkstuk was in opdracht van het Lorentz Lyceum in Arnhem en werd begeleid door J. Anzion van het Candea College in Duiven.\r\nEr hoort nog een tekst bestand bij dit programma wat alle uitleg geeft bij het programma en het proces verduidelijkt.\r\nOm het programma te testen met softwarematige verbeteringen, druk dan op Software.\r\nOm het programma te testen met hardwarematige verbeteringen, druk dan op Hardware.\r\nDe resultaten van de test zijn te zien in het bestandje Verkeerslichten_Resultaten.txt wat op uw bureaublad verschijnt na het stopzetten van het programma.");
-        frame.getContentPane().add(txtTekst, BorderLayout.CENTER);
+        frame.getContentPane().add(txtText, BorderLayout.CENTER);
 
-        // Titel
+        // Title
         JLabel lblTitle = new JLabel("Verkeerslichten");
         lblTitle.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 25));
         lblTitle.setBounds(10, 11, 221, 32);
         frame.getContentPane().add(lblTitle);
 
-        // Foto
+        // Image
         JLabel pnlFoto = new JLabel(new ImageIcon(getClass().getResource("/Sources/intersection_menu_image.png")));
         pnlFoto.setBounds(474, 250, 300, 300);
         frame.getContentPane().add(pnlFoto);
 
-        // Schuiver voor ticks per seconde
+        // Slider for ticks per second
         JSlider sliderTPS = new JSlider();
         sliderTPS.setPaintTicks(true);
         sliderTPS.setPaintLabels(true);
@@ -327,12 +327,12 @@ public class Main {
         });
         frame.getContentPane().add(sliderTPS);
 
-        // Label voor schuiver voor ticks per seconde
+        // Label for slider for ticks per second
         JLabel lblTPS = new JLabel("Snelheid (%):");
         lblTPS.setBounds(5, 250, 100, 50);
         frame.getContentPane().add(lblTPS);
 
-        // Schuiver voor spawner multiplier
+        // Slider for spawner multiplier
         JSlider sliderMuliplier = new JSlider();
         sliderMuliplier.setPaintTicks(true);
         sliderMuliplier.setPaintLabels(true);
@@ -351,12 +351,12 @@ public class Main {
         });
         frame.getContentPane().add(sliderMuliplier);
 
-        // Label voor schuiver voor spawner multiplier
+        // Label for slider for spawner multiplier
         JLabel lblSpawn = new JLabel("Spawn Factor:");
         lblSpawn.setBounds(5, 200, 100, 50);
         frame.getContentPane().add(lblSpawn);
 
-        // Knop voor hardware scenario
+        // Button for hardware scenario
         JButton btnHardware = new JButton("Hardware");
         btnHardware.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -367,7 +367,7 @@ public class Main {
         btnHardware.setBounds(88, 369, 275, 50);
         frame.getContentPane().add(btnHardware);
 
-        // Knop om het programma te sluiten
+        // Button to exit application
         JButton btnExit = new JButton("Exit");
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -378,12 +378,12 @@ public class Main {
         btnExit.setBounds(88, 430, 275, 50);
         frame.getContentPane().add(btnExit);
 
-        // Label voor copyright
+        // Label for copyright
         JLabel lblCopyright = new JLabel("\u00A9 Joeri Meijer 2018");
         lblCopyright.setBounds(10, 536, 140, 14);
         frame.getContentPane().add(lblCopyright);
 
-        // Knop voor software scenario
+        // Button for software scenario
         JButton btnSoftware = new JButton("Software");
         btnSoftware.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -398,25 +398,24 @@ public class Main {
     }
 
     /**
-     * Run een scenario.
+     * Run a scenario
      *
-     * @param scenario:
-     *            de naam van het scenario.
+     * @param scenario: the scenario enum type
      */
     public void runScenario(Scenario scenario) {
-        // Seintje aan update dat er niet gestopt hoeft et worden
+        // Make sure update will be running
         stopped = false;
 
-        // Haal het scherm leeg
+        // Clear the screen
         frame.getContentPane().removeAll();
         frame.repaint();
 
-        // Maak een nieuwe thread voor de update klasse zodat die op zichzelf draait
+        // Add a new update thread
         render = new Render(this);
         Update update = new Update(this, scenario);
         Thread updateThread = new Thread(update, "Update");
 
-        // Start het scenario
+        // Start the scenario
         updateThread.start();
     }
 }
