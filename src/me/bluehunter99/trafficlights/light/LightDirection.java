@@ -1,4 +1,4 @@
-package me.bluehunter99.trafficlights;
+package me.bluehunter99.trafficlights.light;
 
 /**
  *

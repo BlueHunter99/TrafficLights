@@ -1,5 +1,11 @@
 package me.bluehunter99.trafficlights;
 
+import me.bluehunter99.trafficlights.car.Car;
+import me.bluehunter99.trafficlights.car.CarSensor;
+import me.bluehunter99.trafficlights.car.CarSpawner;
+import me.bluehunter99.trafficlights.light.Light;
+import me.bluehunter99.trafficlights.light.LightController;
+
 /**
  *
  * The update class is the class which manages all of the run cycles of the

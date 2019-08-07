@@ -1,5 +1,11 @@
 package me.bluehunter99.trafficlights;
 
+import me.bluehunter99.trafficlights.car.Car;
+import me.bluehunter99.trafficlights.car.CarSensor;
+import me.bluehunter99.trafficlights.light.Light;
+import me.bluehunter99.trafficlights.light.LightDirection;
+import me.bluehunter99.trafficlights.light.LightSide;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;

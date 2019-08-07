@@ -1,4 +1,10 @@
-package me.bluehunter99.trafficlights;
+package me.bluehunter99.trafficlights.car;
+
+import me.bluehunter99.trafficlights.*;
+import me.bluehunter99.trafficlights.light.Light;
+import me.bluehunter99.trafficlights.light.LightDirection;
+import me.bluehunter99.trafficlights.light.LightSide;
+import me.bluehunter99.trafficlights.light.LightState;
 
 import javax.swing.JLabel;
 

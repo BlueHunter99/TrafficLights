@@ -1,4 +1,8 @@
-package me.bluehunter99.trafficlights;
+package me.bluehunter99.trafficlights.light;
+
+import me.bluehunter99.trafficlights.Main;
+import me.bluehunter99.trafficlights.Scenario;
+import me.bluehunter99.trafficlights.car.CarSensor;
 
 /**
  *

@@ -1,5 +1,8 @@
 package me.bluehunter99.trafficlights;
 
+import me.bluehunter99.trafficlights.car.Car;
+import me.bluehunter99.trafficlights.light.Light;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

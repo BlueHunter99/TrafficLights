@@ -1,5 +1,8 @@
 package me.bluehunter99.trafficlights;
 
+import me.bluehunter99.trafficlights.light.LightDirection;
+import me.bluehunter99.trafficlights.light.LightSide;
+
 /**
  *
  * De TestResult klasse is een simpele klasse om de resultaten van testen te

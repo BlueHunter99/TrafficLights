@@ -1,4 +1,8 @@
-package me.bluehunter99.trafficlights;
+package me.bluehunter99.trafficlights.car;
+
+import me.bluehunter99.trafficlights.light.LightDirection;
+import me.bluehunter99.trafficlights.light.LightSide;
+import me.bluehunter99.trafficlights.Main;
 
 /**
  * De CarSensor klasse is de klasse van alle sensoren. Ze bepalen zelf of er een
