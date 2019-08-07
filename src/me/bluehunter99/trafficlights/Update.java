@@ -12,14 +12,14 @@ import me.bluehunter99.trafficlights.light.LightController;
  * program. It controls the spawning of cars and their updating. It also
  * controls the rendering of the individual scenarios and their components.
  *
- * @author Joeri Meijer
+ * @author BlueHunter99
  *
  */
 
 public class Update implements Runnable {
 
     /**
-     * Variabelen
+     * Variables
      */
     private Main gui;
     private CarSpawner spawning;
@@ -32,10 +32,8 @@ public class Update implements Runnable {
     /**
      * Constructor
      *
-     * @param gui:
-     *            main gui object
-     * @param scenario:
-     *            het scenario wat geladen meot worden
+     * @param gui: main gui object
+     * @param scenario: the scenario to be loaded
      */
     public Update(Main gui, Scenario scenario) {
         this.gui = gui;
@@ -45,35 +43,35 @@ public class Update implements Runnable {
     }
 
     /**
-     * Run methode.
+     * Run method
      */
     @Override
     public void run() {
         lc = new LightController(gui, scenario);
         while (true) {
-            // Check of er gestopt is
+            // Check whether the process has been stopped
             if (gui.stopped) {
                 return;
             } else {
-                // Update de lights controller
+                // Update the lights controller
                 lc.update();
 
-                // Update alle auto's
+                // Update all cars
                 for (Car car : gui.cars) {
                     car.update();
                 }
 
-                // Update alle verkeerslichten
+                // Update all lights
                 for (Light light : gui.lights) {
                     light.update();
                 }
 
-                // Update alle sensoren
+                // Update all sensors
                 for (CarSensor sensor : gui.sensors) {
                     sensor.update();
                 }
 
-                // Zorg ervoor dat spawning maar 1 keer per seconde gebeurd
+                // Control the spawnrate
                 if (spawnCounter <= 0) {
                     spawning.run();
                     spawnCounter = gui.tps * secondsPerSpawn;
@@ -84,15 +82,13 @@ public class Update implements Runnable {
                 // Render
                 render.run();
 
-                // Zorg ervoor dat er alleen zoveel geupdate wordt als gespecificeerd door ticks
-                // per second
+                // Implement ticks per second
                 try {
                     Thread.sleep((1000 / gui.tps));
                 } catch (InterruptedException e) {
                     System.out.println("|Error| Update thread could not sleep.");
                 }
             }
-
         }
     }
 }
