@@ -5,16 +5,15 @@ import me.bluehunter99.trafficlights.light.LightSide;
 
 /**
  *
- * De TestResult klasse is een simpele klasse om de resultaten van testen te
- * kunnen opslaan en verwerken zonder grote ArrayLists
+ * The TestResult class is a template for the objects which represents different test results
  *
- * @author Joeri
+ * @author BlueHunter99
  *
  */
 
 public class TestResult {
 
-    // Variabelen
+    // Variables
     public LightSide side;
     public LightDirection direction;
     public int timer;
@@ -22,12 +21,9 @@ public class TestResult {
     /**
      * Constructor
      *
-     * @param side:
-     *            straat
-     * @param direction:
-     *            richting
-     * @param timer:
-     *            timer
+     * @param side: the side of the intersection of the result
+     * @param direction: the direction of the intersection of the result
+     * @param timer: the resulting time
      */
     public TestResult(LightSide side, LightDirection direction, int timer) {
         this.side = side;
