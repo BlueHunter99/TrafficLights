@@ -34,7 +34,7 @@ import javax.swing.event.ChangeListener;
  *
  * The Main class starts the application and is the manager of the dynamic lists containing information.
  *
- * @author Joeri Meijer
+ * @author BlueHunter99
  *
  */
 
