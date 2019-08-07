@@ -12,16 +12,16 @@ import javax.swing.JLabel;
 
 /**
  *
- * De render klasse zorgt ervoor dat alle objecten verschijnen.
+ * De render class is responsible for rendering all the content to the screen
  *
- * @author IK
+ * @author BlueHunter99
  *
  */
 
 public class Render {
 
     /**
-     * Variabelen
+     * Variables
      */
     private Main gui;
     public JLabel lblMap;
@@ -29,19 +29,18 @@ public class Render {
     /**
      * Constructor.
      *
-     * @param gui:
-     *            Main component
+     * @param gui: Main component
      */
     public Render(Main gui) {
         this.gui = gui;
 
-        // Maak achtergrondafbeelding die bereikbaar is vanaf andere klassen.
+        // Add background image for the scenario on which the objects can be rendered
         lblMap = new JLabel("");
         lblMap.setIcon(new ImageIcon(Main.class.getResource("/Sources/intersection_image.png")));
         lblMap.setBounds(0, 0, 800, 600);
         lblMap.setLayout(null);
 
-        // Maak knop om terug te gaan naar het hoofdmenu
+        // Button to return to main menu
         JButton btnClose = new JButton("Back");
         btnClose.setBounds(720, 580, 80, 20);
         btnClose.addActionListener(new ActionListener() {
@@ -54,13 +53,13 @@ public class Render {
     }
 
     /**
-     * Run methode.
+     * Run method.
      */
     public void run() {
-        // Voeg achtergrond afbeelding toe
+        // Add background image to view
         gui.frame.add(lblMap);
 
-        // Teken elke auto met zijn eigen waardes en verwijder het oude plaatje
+        // Remove the old label for the car objects and repaint the new one
         for (int i = 0; i < gui.cars.size(); i++) {
             Car car = gui.cars.get(i);
 
@@ -78,7 +77,7 @@ public class Render {
             }
         }
 
-        // Teken elk verkeerslicht met zijn eigen waardes
+        // Draw every light object with it's own values
         for (int i = 0; i < gui.lights.size(); i++) {
             Light light = gui.lights.get(i);
 
@@ -89,10 +88,9 @@ public class Render {
     }
 
     /**
-     * Methode om auto's van het scherm te verwijderen
+     * Methode to remove cars from the view
      *
-     * @param car:
-     *            de gewilde auto
+     * @param car: the target car
      */
     public void removeCar(Car car) {
         lblMap.remove(car.oldLabel);
