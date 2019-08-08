@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 
 /**
  *
- * De render class is responsible for rendering all the content to the screen
+ * The render class is responsible for rendering all the content to the screen
  *
  * @author BlueHunter99
  *
@@ -88,7 +88,7 @@ public class Render {
     }
 
     /**
-     * Methode to remove cars from the view
+     * Method to remove cars from the view
      *
      * @param car: the target car
      */

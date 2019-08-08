@@ -21,7 +21,7 @@ public class Car {
     // Variables
     private LightSide side;
     private LightDirection direction;
-    private int rotation;
+    public int rotation;
     private Light conflictLight;
     public boolean stopped = false;
     private int timerCount;
