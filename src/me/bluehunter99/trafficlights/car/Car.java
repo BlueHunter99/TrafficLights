@@ -19,10 +19,10 @@ import javax.swing.JLabel;
 public class Car {
 
     // Variables
-    private LightSide side;
-    private LightDirection direction;
+    public LightSide side;
+    public LightDirection direction;
     public int rotation;
-    private Light conflictLight;
+    public Light conflictLight;
     public boolean stopped = false;
     private int timerCount;
     private int timer;
