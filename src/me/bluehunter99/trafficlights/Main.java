@@ -99,7 +99,7 @@ public class Main {
     /**
      * Constructor
      */
-    public Main() {
+    private Main() {
         // Initialize variables
         cars = new CopyOnWriteArrayList<Car>();
         lights = new CopyOnWriteArrayList<Light>();
@@ -107,11 +107,10 @@ public class Main {
         results = new CopyOnWriteArrayList<TestResult>();
         frame = new JFrame();
 
-        // Give the frame the following properties: Size, Centering, Resizing, Decoration, Layout, Background, Exit on Close
+        // Give the frame the following properties: Size, Centering, Resizing, Layout, Background, Exit on Close
         frame.setSize(programWidth, programHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.setUndecorated(true);
         frame.getContentPane().setLayout(null);
         frame.getContentPane().setBackground(Color.WHITE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -134,18 +133,18 @@ public class Main {
         List<String> lines = new ArrayList<String>();
 
         // Make lists for the results for the different directions.
-        List<TestResult> ll = new ArrayList<TestResult>();
-        List<TestResult> ls = new ArrayList<TestResult>();
-        List<TestResult> lr = new ArrayList<TestResult>();
-        List<TestResult> ul = new ArrayList<TestResult>();
-        List<TestResult> us = new ArrayList<TestResult>();
-        List<TestResult> ur = new ArrayList<TestResult>();
-        List<TestResult> rl = new ArrayList<TestResult>();
-        List<TestResult> rs = new ArrayList<TestResult>();
-        List<TestResult> rr = new ArrayList<TestResult>();
-        List<TestResult> dl = new ArrayList<TestResult>();
-        List<TestResult> ds = new ArrayList<TestResult>();
-        List<TestResult> dr = new ArrayList<TestResult>();
+        List<TestResult> ll = new ArrayList<>();
+        List<TestResult> ls = new ArrayList<>();
+        List<TestResult> lr = new ArrayList<>();
+        List<TestResult> ul = new ArrayList<>();
+        List<TestResult> us = new ArrayList<>();
+        List<TestResult> ur = new ArrayList<>();
+        List<TestResult> rl = new ArrayList<>();
+        List<TestResult> rs = new ArrayList<>();
+        List<TestResult> rr = new ArrayList<>();
+        List<TestResult> dl = new ArrayList<>();
+        List<TestResult> ds = new ArrayList<>();
+        List<TestResult> dr = new ArrayList<>();
 
         // Variables for more efficient if-statements
         LightSide left = LightSide.LEFT;
@@ -343,9 +342,9 @@ public class Main {
         sliderMuliplier.setBounds(88, 200, 275, 50);
         sliderMuliplier.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
-                JSlider sliderMuliplier = (JSlider) evt.getSource();
-                if (!sliderMuliplier.getValueIsAdjusting()) {
-                    multiplier = sliderMuliplier.getValue();
+                JSlider sliderMultiplier = (JSlider) evt.getSource();
+                if (!sliderMultiplier.getValueIsAdjusting()) {
+                    multiplier = sliderMultiplier.getValue();
                 }
             }
         });
