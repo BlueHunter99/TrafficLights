@@ -10,23 +10,22 @@ import javax.swing.JLabel;
 
 /**
  *
- * De Car klasse is de klasse die elke auto heeft. Hierin staat hoe hij moet
- * reageren op stoplichten en hoe hij getekend moet zijn.
+ * The car class is the object for each car. It defines how to respond to different traffic systems and how to draw it.
  *
- * @author Joeri
+ * @author BlueHunter99
  *
  */
 
 public class Car {
 
-    // Variabelen
-    public LightSide side;
-    public LightDirection direction;
-    public int rotation;
-    public Light conflictLight;
+    // Variables
+    private LightSide side;
+    private LightDirection direction;
+    private int rotation;
+    private Light conflictLight;
     public boolean stopped = false;
-    public int timerCount;
-    public int timer;
+    private int timerCount;
+    private int timer;
     public int posX;
     public int posY;
     public JLabel oldLabel;
@@ -36,26 +35,21 @@ public class Car {
     /**
      * Constructor
      *
-     * @param side:
-     *            bij welke straat begint de auto?
-     * @param direction:
-     *            welke kant gaat de auto op?
-     * @param posX:
-     *            wat is de begin X positie?
-     * @param posY:
-     *            wat is de begin Y positie?
-     * @param gui:
-     *            Main component
+     * @param side: side of the intersection
+     * @param direction: direction of the car on the intersection
+     * @param posX: starting X position
+     * @param posY: starting Y position
+     * @param gui: Main component
      */
     public Car(LightSide side, LightDirection direction, int posX, int posY, Main gui) {
-        // Variabelen initializeren
+        // Initialize variables
         this.side = side;
         this.direction = direction;
         this.posX = posX;
         this.posY = posY;
         this.gui = gui;
 
-        // Draai de sprite in de goede richting
+        // Turn the sprite in the right direction
         switch (side) {
             case LEFT:
                 rotation = 0;
@@ -71,7 +65,7 @@ public class Car {
                 break;
         }
 
-        // Stel in welk verkeerslicht bij deze auto hoort
+        // Add corresponding traffic light to the car
         for (Light light : gui.lights) {
             if (side == light.side) {
                 if (direction == light.direction) {
@@ -82,18 +76,17 @@ public class Car {
     }
 
     /**
-     * Update methode. Hierin wordt bepaald hoe de auto moet bewegen.
+     * Update method, updates position of the car
      */
     public void update() {
-        // Timer zodat de auto niet meteen begint met bewegen
+        // Timer which adds a delay when the light changes
         if (timerCount == 100) {
             timerCount = 0;
             timer++;
         }
         timerCount++;
 
-        // Als de auto buiten het scherm is dan moet hij verwijderd worden om resources
-        // te besparen
+        // Delete the car object if it gets out of bounds
         if (posX < -40 || posX > 840 || posY < -80 || posY > 640) {
             gui.results.add(new TestResult(side, direction, timer));
             gui.cars.remove(this);
