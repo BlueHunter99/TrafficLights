@@ -42,13 +42,15 @@ public class Render {
 
         // Button to return to main menu
         JButton btnClose = new JButton("Back");
-        btnClose.setBounds(720, 580, 80, 20);
+        btnClose.setBounds(700, 535, 80, 20);
         btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 gui.reset(lblMap);
             }
         });
+        btnClose.setVisible(true);
         lblMap.add(btnClose);
+        gui.frame.add(lblMap);
         gui.frame.repaint();
     }
 
@@ -56,9 +58,6 @@ public class Render {
      * Run method.
      */
     public void run() {
-        // Add background image to view
-        gui.frame.add(lblMap);
-
         // Remove the old label for the car objects and repaint the new one
         for (int i = 0; i < gui.cars.size(); i++) {
             Car car = gui.cars.get(i);
