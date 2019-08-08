@@ -381,7 +381,7 @@ public class Main {
         frame.getContentPane().add(btnExit);
 
         // Label for copyright
-        JLabel lblCopyright = new JLabel("\u00A9 Joeri Meijer 2018");
+        JLabel lblCopyright = new JLabel("\u00A9 Joeri Meijer 2019");
         lblCopyright.setBounds(10, 536, 140, 14);
         frame.getContentPane().add(lblCopyright);
 
