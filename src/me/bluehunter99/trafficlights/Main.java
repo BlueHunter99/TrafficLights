@@ -292,12 +292,15 @@ public class Main {
         txtText.setWrapStyleWord(true);
         txtText.setLineWrap(true);
         txtText.setEditable(false);
-        txtText.setText(
-                "Dit is een programma dat hoort bij een profielwerkstuk over de verkeerslichten op het kruispunt van de Hollandweg en de Burgemeester Matsersingel. Dit profielwerkstuk was in opdracht van het Lorentz Lyceum in Arnhem en werd begeleid door J. Anzion van het Candea College in Duiven.\r\nEr hoort nog een tekst bestand bij dit programma wat alle uitleg geeft bij het programma en het proces verduidelijkt.\r\nOm het programma te testen met softwarematige verbeteringen, druk dan op Software.\r\nOm het programma te testen met hardwarematige verbeteringen, druk dan op Hardware.\r\nDe resultaten van de test zijn te zien in het bestandje Verkeerslichten_Resultaten.txt wat op uw bureaublad verschijnt na het stopzetten van het programma.");
+        txtText.setText("This application is part of the final research project I did on traffic lights for my highschool. The junction shown in this simulation is of the Hollandweg and the Burgemeester Matsersingel. This research project was assigned by the Lorentz Lyceum in Arnhem and monitored by J. Anzion of the Candea College in Duiven.\r\n" +
+                        "To test the custom software rules I made for this model press Software.\r\n" +
+                        "To test the custom sensors I added for this model press Software.\r\n" +
+                        "The results of the tests in the model will be logged in a file called TrafficLights_Results.txt which will appear on your desktop after stopping the simulation.\r\n" +
+                        "The sliders below can be used to adjust the amount of cars spawning (spawn factor) and the speed at which the simulation is run (speed).");
         frame.getContentPane().add(txtText, BorderLayout.CENTER);
 
         // Title
-        JLabel lblTitle = new JLabel("Verkeerslichten");
+        JLabel lblTitle = new JLabel("TrafficLights");
         lblTitle.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 25));
         lblTitle.setBounds(10, 11, 221, 32);
         frame.getContentPane().add(lblTitle);
@@ -327,7 +330,7 @@ public class Main {
         frame.getContentPane().add(sliderTPS);
 
         // Label for slider for ticks per second
-        JLabel lblTPS = new JLabel("Snelheid (%):");
+        JLabel lblTPS = new JLabel("Speed (%):");
         lblTPS.setBounds(5, 250, 100, 50);
         frame.getContentPane().add(lblTPS);
 
